@@ -262,14 +262,12 @@ public class LoginFrame extends JFrame implements handleImageResizing {
                 for (int i = 0; i < signupFieldsPanel.getComponentCount(); i++) {
                     if (signupFieldsPanel.getComponent(i) instanceof JPanel inputPanel) {
                         for (var comp : inputPanel.getComponents()) {
-                            if (comp instanceof JTextField textField) {
-                                textField.setText(null);
-                            } else if (comp instanceof JPasswordField jPasswordField) {
-                                jPasswordField.setText(null);
-                            } else if (comp instanceof JComboBox<?> comboBox) {
-                                comboBox.setSelectedIndex(0);
-                            } else if (comp instanceof JCheckBox checkBox) {
-                                checkBox.setSelected(false);
+                            switch (comp) {
+                                case JTextField textField -> textField.setText(null);
+                                case JComboBox<?> comboBox -> comboBox.setSelectedIndex(0);
+                                case JCheckBox checkBox -> checkBox.setSelected(false);
+                                default -> {
+                                }
                             }
                         }
                     }
